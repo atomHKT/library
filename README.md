@@ -1,1 +1,1 @@
-# library
+This is project is part of The Odin Project's Javascript course. The objective is to build a simple library app.
