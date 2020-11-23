@@ -1,5 +1,4 @@
 :root {
-
 	--color-green: rgba(80, 227, 194, 1);
 	--color-red: rgba(227, 80, 97, 1);
 	--color-blue: rgba(8, 138, 251, 1);
@@ -7,7 +6,6 @@
 	--color-med: rgba(40, 44, 52, 1);
 	--color-light: rgba(44, 49, 60, 1);
 	--color-lighter: rgba(155, 157, 158, 1);
-
 }
 
 html {
@@ -44,6 +42,10 @@ header>* {
 
 header>*:hover {
 	color: var(--color-blue);
+}
+
+header h1:hover {
+	letter-spacing: 0.3em;
 }
 
 header h1 {
@@ -85,11 +87,9 @@ button:focus {
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
-	/* justify-content: flex-start;
-	align-items: center; */
+	justify-content: flex-start;
+	align-items: center;
 }
-
-.wrapper>* {}
 
 #new-book {
 	width: 100vw;
@@ -128,11 +128,11 @@ button:focus {
 }
 
 .item-control {
-	padding: 0.3rem 0 0.3rem 0.5rem;
+	padding: 0.2rem 0 0.2rem 0.5rem;
 	color: var(--color-dark);
 	border: 2px solid var(--color-dark);
 	border-radius: 4px;
-	font-size: 1.3em;
+	font-size: 1.1em;
 }
 
 #read-item {
@@ -168,6 +168,7 @@ button:focus {
 
 #submit-btn:hover {
 	background-color: var(--color-blue);
+	letter-spacing: 0.2em;
 }
 
 ::placeholder {
@@ -188,7 +189,7 @@ button:focus {
 }
 
 #library {
-	width: 90%;
+	width: 95%;
 	max-width: 1200px;
 	margin: 1.5rem auto;
 	display: flex;
@@ -196,7 +197,6 @@ button:focus {
 	justify-content: center;
 	flex-wrap: wrap;
 	opacity: 1;
-	/* transform: translateY(-100%); */
 	transition: all 1s ease;
 }
 
@@ -255,13 +255,8 @@ button:focus {
 	background-color: var(--color-red);
 }
 
-.remove-btn:hover {
-	transform: scale(1.05);
-}
-
-.is-read-toggle:hover {
-	background-color: var(--color-green);
-	transform: scale(1.05);
+.button-box>*:hover {
+	letter-spacing: 0.3em;
 }
 
 @media all and (max-width:700px) {}

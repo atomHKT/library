@@ -21,14 +21,14 @@ const snapToArray = (snapshot) => {
 	return outArr;
 };
 
-// Realtime data retrieve from firebase db, 
-// triggers display update and calc max book index
-const retrieveFromDB = () => {
-	libRef.on('value', (snap) => {
+const retrieveFromDB = async () => {
+	// once() method
+	// waiting the data to be retrieved before executing the following of code
+	await libRef.once('value', (snap) => {
 		myLibrary = snapToArray(snap);
-		displayLibrary();
-		maxBookIndex = findMaxBookIndex(myLibrary);
 	});
+	maxBookIndex = findMaxBookIndex(myLibrary);
+	console.log(maxBookIndex);
 };
 
 const findMaxBookIndex = (arr) => {
@@ -49,12 +49,14 @@ const toggleIsRead = (e) => {
 	libRef.child(book.id).update({
 		isRead: updtVal
 	});
+	displayLibrary();
 };
 
 const removeBook = (e) => {
 	const book = e.target.parentNode.parentNode;
-	// Remove book from db
+	// Remove book from db and update display
 	libRef.child(book.id).remove();
+	displayLibrary();
 };
 
 const submitNewBook = (e) => {
@@ -64,8 +66,9 @@ const submitNewBook = (e) => {
 	// Reset and hide form
 	nForm.reset();
 	nAdd.click();
-	// Add new book to db
+	// Add new book to db and update display
 	libRef.child(newBook.index).set(newBook);
+	displayLibrary();
 };
 
 const displayBook = (book) => {
@@ -103,7 +106,9 @@ const displayBook = (book) => {
 	removeBtn.addEventListener('click', removeBook);
 };
 
-const displayLibrary = () => {
+const displayLibrary = async () => {
+	// waiting the data to be retrieved before executing the following of code
+	await retrieveFromDB();
 	nLibrary.innerHTML = '';
 	if (Array.isArray(myLibrary) && myLibrary.length !== 0) {
 		myLibrary.forEach(book => displayBook(book));
@@ -146,5 +151,41 @@ let maxBookIndex = 0;
 let db = firebase.database();
 let libRef = db.ref('data');
 
+nForm.reset();
 createEventHandlers();
-retrieveFromDB();
+displayLibrary();
+
+myLibrary = [{
+	index: 0,
+	title: '0',
+	author: '2',
+	pages: '3',
+	isRead: true
+
+}, {
+	index: 1,
+	title: '1',
+	author: '5',
+	pages: '6',
+	isRead: false
+}, {
+	index: 2,
+	title: '2',
+	author: '5',
+	pages: '6',
+	isRead: false
+}, {
+	index: 3,
+	title: '3',
+	author: '5',
+	pages: '6',
+	isRead: false
+}, {
+	index: 4,
+	title: '4',
+	author: '5',
+	pages: '6',
+	isRead: false
+}];
+
+libRef.set(myLibrary);
