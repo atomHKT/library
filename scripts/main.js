@@ -4,13 +4,23 @@ const showForm = () => {
 	nAdd.classList.toggle('blue');
 }
 
-const Book = function (index, title, author, pages, read) {
-	this.index = index;
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.isRead = read;
-};
+// const Book = function (index, title, author, pages, read) {
+// 	this.index = index;
+// 	this.title = title;
+// 	this.author = author;
+// 	this.pages = pages;
+// 	this.isRead = read;
+// };
+
+class Book {
+	constructor(index, title, author, pages, read) {
+		this.index = index;
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.isRead = read;
+	}
+}
 
 const snapToArray = (snapshot) => {
 	let outArr = [];
